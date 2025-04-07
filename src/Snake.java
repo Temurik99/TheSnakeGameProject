@@ -45,12 +45,20 @@ public class Snake {
         segments.add(0, new SnakeSegment(newRow, newCol));
 
         if (newRow == apple.getRow() && newCol == apple.getCol()) {
+            // If golden apple, add 4 extra segments to grow by 5 total
+            if (apple instanceof GoldenApple) {
+                GameObject tail = segments.get(segments.size() - 1);
+                for (int i = 0; i < 4; i++) {
+                    segments.add(new SnakeSegment(tail.getRow(), tail.getCol()));
+                }
+            }
             return true;
         } else {
             segments.remove(segments.size() - 1);
             return false;
         }
     }
+
 
     public boolean checkSelfCollision() {
         GameObject head = segments.get(0);

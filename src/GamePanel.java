@@ -41,9 +41,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
             r = rand.nextInt(ROWS);
             c = rand.nextInt(COLS);
         } while (board[r][c].hasApple());
-        apple = new Apple(r, c);
+        // 1 in 5 chance to spawn a golden apple
+        if (rand.nextInt(5) == 0) {
+            apple = new GoldenApple(r, c);
+        } else {
+            apple = new Apple(r, c);
+        }
         board[r][c].setApple(true);
     }
+
 
     @Override
     protected void paintComponent(Graphics g) {
