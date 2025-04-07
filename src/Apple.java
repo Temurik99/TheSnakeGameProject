@@ -5,6 +5,7 @@ public class Apple extends GameObject {
         super(row, col);
     }
 
+
     @Override
     public void draw(Graphics g) {
         int x = col * GamePanel.CELL_SIZE;

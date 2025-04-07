@@ -17,6 +17,8 @@ public class Cell {
         return hasApple;
     }
 
+
+
     public void draw(Graphics g) {
         int x = col * GamePanel.CELL_SIZE;
         int y = row * GamePanel.CELL_SIZE;

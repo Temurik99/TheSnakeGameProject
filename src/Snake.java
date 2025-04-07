@@ -13,6 +13,7 @@ public class Snake {
         }
     }
 
+
     public void setDirection(Direction d) {
         dir = d;
     }
@@ -26,6 +27,8 @@ public class Snake {
             seg.draw(g);
         }
     }
+
+
 
     public boolean move(Cell[][] board, Apple apple) {
         GameObject head = segments.get(0);
@@ -45,7 +48,6 @@ public class Snake {
         segments.add(0, new SnakeSegment(newRow, newCol));
 
         if (newRow == apple.getRow() && newCol == apple.getCol()) {
-            // If golden apple, add 4 extra segments to grow by 5 total
             if (apple instanceof GoldenApple) {
                 GameObject tail = segments.get(segments.size() - 1);
                 for (int i = 0; i < 4; i++) {
@@ -58,6 +60,7 @@ public class Snake {
             return false;
         }
     }
+
 
 
     public boolean checkSelfCollision() {

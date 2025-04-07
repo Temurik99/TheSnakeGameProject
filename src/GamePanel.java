@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 
+
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public static final int CELL_SIZE = 20;
     public static final int COLS = 30;
@@ -41,7 +42,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
             r = rand.nextInt(ROWS);
             c = rand.nextInt(COLS);
         } while (board[r][c].hasApple());
-        // 1 in 5 chance to spawn a golden apple
         if (rand.nextInt(5) == 0) {
             apple = new GoldenApple(r, c);
         } else {
