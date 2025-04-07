@@ -1,4 +1,3 @@
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,42 +7,65 @@ public class Snake {
     private List<GameObject> segments = new ArrayList<>();
     private Direction dir = Direction.RIGHT;
 
-    public Snake(int r, int c) {
+    public Snake(int startRow, int startCol) {
         for (int i = 0; i < 3; i++) {
-            segments.add(new SnakeSegment(r, c - i));
+            segments.add(new SnakeSegment(startRow, startCol - i));
         }
     }
 
-    public void setDirection(Direction d) { dir = d; }
-
-    public void draw(Graphics g) {
-        for (GameObject seg : segments) seg.draw(g);
+    public void setDirection(Direction d) {
+        dir = d;
     }
 
-    public void move() {
+    public int getLength() {
+        return segments.size();
+    }
+
+    public void draw(java.awt.Graphics g) {
+        for (GameObject seg : segments) {
+            seg.draw(g);
+        }
+    }
+
+    public boolean move(Cell[][] board, Apple apple) {
         GameObject head = segments.get(0);
-        int newR = head.row, newC = head.col;
+        int newRow = head.getRow();
+        int newCol = head.getCol();
+
         switch (dir) {
-            case UP    -> newR--;
-            case DOWN  -> newR++;
-            case LEFT  -> newC--;
-            case RIGHT -> newC++;
+            case UP    -> newRow--;
+            case DOWN  -> newRow++;
+            case LEFT  -> newCol--;
+            case RIGHT -> newCol++;
         }
-        newR = (newR + GamePanel.ROWS) % GamePanel.ROWS;
-        newC = (newC + GamePanel.COLS) % GamePanel.COLS;
-        segments.add(0, new SnakeSegment(newR, newC));
-        segments.remove(segments.size() - 1);
+
+        newRow = (newRow + GamePanel.ROWS) % GamePanel.ROWS;
+        newCol = (newCol + GamePanel.COLS) % GamePanel.COLS;
+
+        segments.add(0, new SnakeSegment(newRow, newCol));
+
+        if (newRow == apple.getRow() && newCol == apple.getCol()) {
+            return true;
+        } else {
+            segments.remove(segments.size() - 1);
+            return false;
+        }
     }
 
     public boolean checkSelfCollision() {
         GameObject head = segments.get(0);
         for (int i = 1; i < segments.size(); i++) {
-            if (head.row == segments.get(i).row && head.col == segments.get(i).col) {
+            if (head.getRow() == segments.get(i).getRow()
+                    && head.getCol() == segments.get(i).getCol()) {
                 return true;
             }
         }
         return false;
     }
-}
 
+    public Direction getDirection() {
+        return dir;
+    }
+
+}
 

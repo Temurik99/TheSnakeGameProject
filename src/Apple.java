@@ -1,7 +1,7 @@
 import java.awt.*;
 
-public class SnakeSegment extends GameObject {
-    public SnakeSegment(int row, int col) {
+public class Apple extends GameObject {
+    public Apple(int row, int col) {
         super(row, col);
     }
 
@@ -9,8 +9,8 @@ public class SnakeSegment extends GameObject {
     public void draw(Graphics g) {
         int x = col * GamePanel.CELL_SIZE;
         int y = row * GamePanel.CELL_SIZE;
-        g.setColor(Color.GREEN);
-        g.fillRect(x, y, GamePanel.CELL_SIZE, GamePanel.CELL_SIZE);
+        g.setColor(Color.RED);
+        g.fillOval(x + 4, y + 4, GamePanel.CELL_SIZE - 8, GamePanel.CELL_SIZE - 8);
     }
 }
 
