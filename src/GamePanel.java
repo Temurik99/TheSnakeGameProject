@@ -88,9 +88,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         repaint();
     }
 
-    // Add this helper to reset everything
     private void resetGame() {
-        // Clear board apples
+
         for (int r = 0; r < ROWS; r++) {
             for (int c = 0; c < COLS; c++) {
                 board[r][c].setApple(false);
